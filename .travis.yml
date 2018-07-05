@@ -57,6 +57,10 @@ before_script:
    - ${FC} --version
    - mpirun --version
    # Now build baselibs
+   - printenv
+   - ${FC} --version
+   - ${CC} --version
+   - ${CXX} --version
    - sh ./src/Config/travis-install-baselibs.sh ${BASELIBS_VERSION} ${BASELIBS_MPI} ${BASELIBS_COMPILER}
    # set up Baselibs location
    - export BASEDIR=${HOME}/local/Baselibs/${BASELIBS_VERSION}
