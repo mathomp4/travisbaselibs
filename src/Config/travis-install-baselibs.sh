@@ -17,7 +17,7 @@ case "$BASELIBS_VERSION" in
       ALLDIRS='jpeg zlib szlib curl hdf4 hdf5 h5edit netcdf netcdf-fortran udunits2 nccmp esmf'
       mkdir -p ${HOME}/Baselibs/src/ && cd ${HOME}/Baselibs/src/
       wget --no-check-certificate https://www.dropbox.com/s/fxbz31o82ihzfvg/ESMA-Baselibs-4.0.11.tar.gz
-      tar xjf ESMA-Baselibs-4.0.11.tar.gz
+      tar xzf ESMA-Baselibs-4.0.11.tar.gz
       cd ESMA-Baselibs-4.0.11/src
       make -j2 install ESMF_COMM=$MPISTACK ESMF_COMPILER=$COMPILER --prefix=${HOME}/local/Baselibs/${BASELIBS_VERSION}/${os} ALLDIRS=$ALLDIRS
       cd ${HOME}
