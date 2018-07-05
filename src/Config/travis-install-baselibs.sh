@@ -19,7 +19,7 @@ case "$BASELIBS_VERSION" in
       wget --no-check-certificate https://www.dropbox.com/s/fxbz31o82ihzfvg/ESMA-Baselibs-4.0.11.tar.gz
       tar xzf ESMA-Baselibs-4.0.11.tar.gz
       cd ESMA-Baselibs-4.0.11/src
-      make -j2 install ESMF_COMM=$MPISTACK ESMF_COMPILER=$COMPILER --prefix=${HOME}/local/Baselibs/${BASELIBS_VERSION}/${os} ALLDIRS=$ALLDIRS
+      make -j2 install ESMF_COMM=$MPISTACK ESMF_COMPILER=$COMPILER prefix=${HOME}/local/Baselibs/${BASELIBS_VERSION}/${os} ALLDIRS=$ALLDIRS
       cd ${HOME}
       exit 0
    else
