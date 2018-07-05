@@ -50,6 +50,9 @@ before_install:
 
 before_script:
    - eval "${MATRIX_EVAL}"
+   - export CC=${CC}
+   - export CXX=${CXX}
+   - export FC=${FC}
    - ${FC} --version
    - ${CC} --version
    - ${CXX} --version
