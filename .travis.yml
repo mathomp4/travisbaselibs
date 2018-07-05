@@ -45,6 +45,9 @@ before_install:
       fi
 
 before_script:
+   - ${FC} --version
+   - ${CC} --version
+   - ${CXX} --version
    # install MPI
    - mkdir -p ${HOME}/local
    - ls -r ${HOME}/local
