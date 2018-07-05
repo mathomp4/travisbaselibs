@@ -19,6 +19,10 @@ matrix:
            - USE_MPI=YES
            - MPI_NAME=openmpi-3.1.0
            - CACHE_NAME=linux-gcc8-openmpi310
+           - BASELIBS_OS=Linux
+           - BASELIBS_VERSION=4.0.11
+           - BASELIBS_MPI=openmpi
+           - BASELIBS_COMPILER=gfortran
 
 # caching of the whole `local` directory. Can't cache only the one for this
 # `env`, because otherwise the different instances will overwrite the cache.
@@ -40,20 +44,27 @@ before_install:
 
 before_script:
    # install MPI
-   - |
-      if [ $USE_MPI == YES ] ; then
-         mkdir -p ${HOME}/local
-         ls -r ${HOME}/local
-         sh ./src/Config/travis-install-mpi.sh ${MPI_NAME}
-         # set up MPI location
-         export PATH=${PATH}:${HOME}/local/${MPI_NAME}/bin
-         export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
-         export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
-         # print out version information
-         ${FC} --version
-         mpirun --version
-      fi
+   - mkdir -p ${HOME}/local
+   - ls -r ${HOME}/local
+   - sh ./src/Config/travis-install-mpi.sh ${MPI_NAME}
+   # set up MPI location
+   - export PATH=${PATH}:${HOME}/local/${MPI_NAME}/bin
+   - export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
+   - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
+   - # print out version information
+   - ${FC} --version
+   - mpirun --version
    # Now build baselibs
+   - sh ./src/Config/travis-install-baselibs.sh ${BASELIBS_VERSION} ${BASELIBS_MPI} ${BASELIBS_COMPILER}
+   # set up Baselibs location
+   - export BASEDIR=${HOME}/local/Baselibs/${BASELIBS_VERSION}
+   - export basedir=${HOME}/local/Baselibs/${BASELIBS_VERSION}
+   - export PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/bin
+   - export LD_LIBRARY_PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/lib
+   - export DYLD_LIBRARY_PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/lib
+   - export MANPATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/share/man
+   - printenv
+   # Build GEOS
    - cd ${TRAVIS_BUILD_DIR}
    - mkdir build
 
