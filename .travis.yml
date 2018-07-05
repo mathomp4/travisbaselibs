@@ -40,26 +40,26 @@ before_install:
 
 before_script:
    # install MPI
-   #- |
-      #if [ $USE_MPI == YES ] ; then
-         #mkdir -p ${HOME}/local
-         #ls -r ${HOME}/local
-         #sh ./tools/travis-install-mpi.sh ${MPI_NAME}
-         ## set up MPI location
-         #export PATH=${PATH}:${HOME}/local/${MPI_NAME}/bin
-         #export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
-         #export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
-         ## print out version information
-         #${FC} --version
-         #mpirun --version
-      #fi
+   - |
+      if [ $USE_MPI == YES ] ; then
+         mkdir -p ${HOME}/local
+         ls -r ${HOME}/local
+         sh ./src/Config/travis-install-mpi.sh ${MPI_NAME}
+         # set up MPI location
+         export PATH=${PATH}:${HOME}/local/${MPI_NAME}/bin
+         export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
+         export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
+         # print out version information
+         ${FC} --version
+         mpirun --version
+      fi
    # Now build baselibs
    - cd ${TRAVIS_BUILD_DIR}
    - mkdir build
 
 script:
    # Build
-   - tree
+   - tree -d -L4 ${HOME}
    #- make -j2
    # Make tests
    #- make -j2 tests
