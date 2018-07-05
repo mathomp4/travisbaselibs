@@ -15,7 +15,7 @@ openmpi-3.1.0)
       wget --no-check-certificate https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.0.tar.bz2
       tar xjf openmpi-3.1.0.tar.bz2
       cd openmpi-3.1.0
-      ./configure --prefix=${HOME}/local/${MPI_IMPL} --disable-wrapper-rpath --disable-wrapper-runpath && make -j 4 && make install && make clean
+      ./configure --prefix=${HOME}/local/${MPI_IMPL} --disable-wrapper-rpath --disable-wrapper-runpath && make -j 2 && make install && make clean
       cd ../../
       exit 0
    else
