@@ -16,6 +16,8 @@ matrix:
                  - tree
         env:
            - FC='gfortran-8'
+           - CC='gcc-8'
+           - CXX='g++-8'
            - USE_MPI=YES
            - MPI_NAME=openmpi-3.1.0
            - CACHE_NAME=linux-gcc8-openmpi310

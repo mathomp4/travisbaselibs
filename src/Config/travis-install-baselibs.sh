@@ -15,6 +15,7 @@ case "$BASELIBS_VERSION" in
    if [ ! -d "${HOME}/local/Baselibs/${BASELIBS_VERSION}/${os}/bin" ]
    then
       ALLDIRS='jpeg zlib szlib curl hdf4 hdf5 h5edit netcdf netcdf-fortran udunits2 nccmp esmf'
+      env
       mkdir -p ${HOME}/Baselibs/src/ && cd ${HOME}/Baselibs/src/
       wget --no-check-certificate https://www.dropbox.com/s/fxbz31o82ihzfvg/ESMA-Baselibs-4.0.11.tar.gz
       tar xzf ESMA-Baselibs-4.0.11.tar.gz
