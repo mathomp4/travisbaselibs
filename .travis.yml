@@ -20,6 +20,7 @@ matrix:
            - FC='gfortran-8'
            - CC='gcc-8'
            - CXX='g++-8'
+           - MATRIX_EVAL='CC=gcc-8 && CXX=g++-8 && FC=gfortran-8'
            - USE_MPI=YES
            - MPI_NAME=openmpi-3.1.0
            - CACHE_NAME=linux-gcc8-openmpi310
@@ -39,6 +40,7 @@ cache:
    timeout: 600
 
 before_install:
+   - eval "${MATRIX_EVAL}"
    - |
       if [ $TRAVIS_OS_NAME == osx ] ; then
          brew cask uninstall oclint || exit 1
@@ -47,6 +49,7 @@ before_install:
       fi
 
 before_script:
+   - eval "${MATRIX_EVAL}"
    - ${FC} --version
    - ${CC} --version
    - ${CXX} --version
