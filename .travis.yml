@@ -69,7 +69,6 @@ before_script:
    - ${FC} --version
    - mpirun --version
    # Now build baselibs
-   - printenv
    - export CC=${CC}
    - export CXX=${CXX}
    - export FC=${FC}
@@ -84,7 +83,6 @@ before_script:
    - export LD_LIBRARY_PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/lib
    - export DYLD_LIBRARY_PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/lib
    - export MANPATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/share/man
-   - printenv
    # Build GEOS
    - cd ${TRAVIS_BUILD_DIR}
    - mkdir build
