@@ -36,7 +36,8 @@ matrix:
 # is build, parallel workers can be re-enabled.
 cache:
    directories:
-      - ${HOME}/local
+      - ${HOME}/local-mpi
+      - ${HOME}/local-baselibs
    timeout: 600
 
 before_install:
@@ -57,25 +58,28 @@ before_script:
    - ${CC} --version
    - ${CXX} --version
    # install MPI
-   - mkdir -p ${HOME}/local
-   - ls -r ${HOME}/local
+   - mkdir -p ${HOME}/local-mpi
+   - ls -r ${HOME}/local-mpi
    - sh ./src/Config/travis-install-mpi.sh ${MPI_NAME}
    # set up MPI location
-   - export PATH=${PATH}:${HOME}/local/${MPI_NAME}/bin
-   - export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
-   - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local/${MPI_NAME}/lib
+   - export PATH=${PATH}:${HOME}/local-mpi/${MPI_NAME}/bin
+   - export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
+   - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
    - # print out version information
    - ${FC} --version
    - mpirun --version
    # Now build baselibs
    - printenv
+   - export CC=${CC}
+   - export CXX=${CXX}
+   - export FC=${FC}
    - ${FC} --version
    - ${CC} --version
    - ${CXX} --version
    - sh ./src/Config/travis-install-baselibs.sh ${BASELIBS_VERSION} ${BASELIBS_MPI} ${BASELIBS_COMPILER}
    # set up Baselibs location
-   - export BASEDIR=${HOME}/local/Baselibs/${BASELIBS_VERSION}
-   - export basedir=${HOME}/local/Baselibs/${BASELIBS_VERSION}
+   - export BASEDIR=${HOME}/local-baselibs/${BASELIBS_VERSION}
+   - export basedir=${HOME}/local-baselibs/${BASELIBS_VERSION}
    - export PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/bin
    - export LD_LIBRARY_PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/lib
    - export DYLD_LIBRARY_PATH=${PATH}:${BASEDIR}/${BASELIBS_OS}/lib
