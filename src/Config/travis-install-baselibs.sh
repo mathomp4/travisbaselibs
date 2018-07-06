@@ -13,7 +13,7 @@ case "$BASELIBS_VERSION" in
 4.0.11)
    if [ ! -d "${HOME}/local-baselibs/${BASELIBS_VERSION}/${os}/bin" ]
    then
-      ALLDIRS='jpeg zlib szlib curl hdf4 hdf5 h5edit netcdf netcdf-fortran udunits2 nccmp esmf'
+      export ALLDIRS='jpeg zlib szlib curl hdf4 hdf5 h5edit netcdf netcdf-fortran udunits2 nccmp esmf'
       ${FC} --version
       ${CC} --version
       ${CXX} --version
@@ -26,7 +26,7 @@ case "$BASELIBS_VERSION" in
          ESMF_COMM=$MPISTACK ESMF_COMPILER=$COMPILER \
          CC=${CC} CXX=${CXX} FC=${FC} \
          ES_CC=${CC} ES_CXX=${CXX} ES_FC=${FC} \
-         prefix=${HOME}/local-baselibs/${BASELIBS_VERSION}/${os} ALLDIRS=$ALLDIRS
+         prefix=${HOME}/local-baselibs/${BASELIBS_VERSION}/${os} ALLDIRS="${ALLDIRS}"
       cd ${HOME}
       exit 0
    else
