@@ -89,7 +89,7 @@ before_script:
 
 script:
    # Build
-   - tree -d -L 4 ${HOME}
+   - tree -d -L 4 ${HOME}/local-baselibs
    #- make -j2
    # Make tests
    #- make -j2 tests
