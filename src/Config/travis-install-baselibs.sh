@@ -13,7 +13,8 @@ case "$BASELIBS_VERSION" in
 4.0.11)
    if [ ! -x "${HOME}/local-baselibs/${BASELIBS_VERSION}/${os}/bin/ESMF_Info" ]
    then
-      export ALLDIRS='jpeg zlib szlib curl hdf4 hdf5 h5edit netcdf netcdf-fortran udunits2 nccmp esmf'
+      #export ALLDIRS='jpeg zlib szlib curl hdf4 hdf5 netcdf netcdf-fortran udunits2 nccmp esmf'
+      export ALLDIRS='jpeg zlib szlib curl hdf4 hdf5'
       ${FC} --version
       ${CC} --version
       ${CXX} --version
