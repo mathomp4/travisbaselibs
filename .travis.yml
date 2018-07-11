@@ -65,6 +65,8 @@ before_script:
    - export PATH=${PATH}:${HOME}/local-mpi/${MPI_NAME}/bin
    - export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
    - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
+   - export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
+   - export INCLUDE=${LD_LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/include
    - # print out version information
    - ${FC} --version
    - mpirun --version
