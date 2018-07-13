@@ -10,8 +10,8 @@ COMPILER="$3"
 MPI_PATH="$4"
 os=`uname`
 
-export MPILIBS=$(mpif90 -showme:link)
-export MPIINC=-I$(mpif90 -showme:incdirs)
+MPILIBS=$(mpif90 -showme:link)
+MPIINC=$(mpif90 -showme:incdirs)
 
 case "$BASELIBS_VERSION" in
 4.0.11)
@@ -29,9 +29,9 @@ case "$BASELIBS_VERSION" in
       make -j2 install \
          ESMF_COMM=$MPISTACK ESMF_COMPILER=$COMPILER \
          CC=${CC} CXX=${CXX} FC=${FC} 
-         CFLAGS="${MPIINC} ${MPILIBS}" \
-         FCFLAGS="${MPIINC} ${MPILIBS}" \
-         LDFLAGS="${MPIINC} ${MPILIBS}" \
+         CFLAGS="-I${MPIINC} ${MPILIBS}" \
+         FCFLAGS="-I${MPIINC} ${MPILIBS}" \
+         LDFLAGS="-I${MPIINC} ${MPILIBS}" \
          ES_CC=${CC} ES_CXX=${CXX} ES_FC=${FC} \
          prefix=${HOME}/local-baselibs/${BASELIBS_VERSION}/${os} ALLDIRS="${ALLDIRS}"
       make verify \
