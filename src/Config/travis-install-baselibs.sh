@@ -7,6 +7,7 @@ set -e
 BASELIBS_VERSION="$1"
 MPISTACK="$2"
 COMPILER="$3"
+MPI_PATH="$4"
 os=`uname`
 
 case "$BASELIBS_VERSION" in
@@ -24,7 +25,7 @@ case "$BASELIBS_VERSION" in
       cd ESMA-Baselibs-4.0.11/src
       make -j2 install \
          ESMF_COMM=$MPISTACK ESMF_COMPILER=$COMPILER \
-         CC=${CC} CXX=${CXX} FC=${FC} \
+         CC=${CC} CXX=${CXX} FC=${FC} CFLAGS="-I${MPI_PATH}/include" \
          ES_CC=${CC} ES_CXX=${CXX} ES_FC=${FC} \
          prefix=${HOME}/local-baselibs/${BASELIBS_VERSION}/${os} ALLDIRS="${ALLDIRS}"
       make verify \

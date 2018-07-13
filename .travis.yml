@@ -62,11 +62,12 @@ before_script:
    - ls -r ${HOME}/local-mpi
    - sh ./src/Config/travis-install-mpi.sh ${MPI_NAME}
    # set up MPI location
-   - export PATH=${PATH}:${HOME}/local-mpi/${MPI_NAME}/bin
-   - export LIBRARY_PATH=${LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
-   - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
-   - export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/lib
-   - export INCLUDE=${LD_LIBRARY_PATH}:${HOME}/local-mpi/${MPI_NAME}/include
+   - export MPI_PATH=${HOME}/local-mpi/${MPI_NAME}
+   - export PATH=${PATH}:${MPI_PATH}/bin
+   - export LIBRARY_PATH=${LIBRARY_PATH}:${MPI_PATH}/lib
+   - export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MPI_PATH}/lib
+   - export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MPI_PATH}/lib
+   - export INCLUDE=${LD_LIBRARY_PATH}:${MPI_PATH}/include
    - # print out version information
    - ${FC} --version
    - mpirun --version
@@ -77,7 +78,7 @@ before_script:
    - ${FC} --version
    - ${CC} --version
    - ${CXX} --version
-   - sh ./src/Config/travis-install-baselibs.sh ${BASELIBS_VERSION} ${BASELIBS_MPI} ${BASELIBS_COMPILER}
+   - sh ./src/Config/travis-install-baselibs.sh ${BASELIBS_VERSION} ${BASELIBS_MPI} ${BASELIBS_COMPILER} ${MPI_PATH}
    # set up Baselibs location
    - export BASEDIR=${HOME}/local-baselibs/${BASELIBS_VERSION}
    - export basedir=${HOME}/local-baselibs/${BASELIBS_VERSION}
